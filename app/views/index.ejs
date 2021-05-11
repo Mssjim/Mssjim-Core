@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Mssjim">
+        <link rel="icon" type="image/png" href="/images/logo.png"/>
+        <title>Mssjim Core</title>
+
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/table.css">
+    </head>
+
+    <body>
+        <header>
+            <div>
+                <h1>Mssjim Core</h1>
+            </div>
+        </header>
+        <ul>
+            <li><a href="/" class="active">Inicio</a></li>
+            <li><a href="/bots">Bots</a></li>
+            <li><a href="/">SLA</a></li>
+            <li><a href="/">SLA</a></li>
+            <% if(!session.autorizado) { %>
+                <li style="float: right;"><a href="/login">Login</i></a></li>
+            <% } else { %>
+                <li style="float: right;"><a href="/logout">Sair</a></li>
+            <%}%>
+        </ul>
+        <div>
+            <% if(pagina == 'home') { %>
+                <%- include ("home.ejs") %>
+            <% } else if(pagina == 'bots') { %>
+                <%- include ("bots.ejs") %>
+            <% } %>
+        </div>
+            
+        <footer>             
+            <p class="copyright bg-default" id="copyright">Copyright © Mssjim 2021. Todos os direitos reservados</p>        
+        </footer>
+    </body>
+</html>

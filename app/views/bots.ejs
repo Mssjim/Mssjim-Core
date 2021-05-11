@@ -1,0 +1,73 @@
+<div class="botsTable">
+    <table>
+        <thead>
+            <tr>
+                <th><b>Avatar</b></th>
+                <th><b>Username</b></th>
+                <th><b>Status</b></th>
+            </tr>
+        </thead>    
+        <tbody>
+            <% bots.forEach(bot => { %>
+                <% user = bot.user %>
+                <% if(user != undefined) { %>
+                    <tr>
+                        <td>
+                            <img src="<%= user.displayAvatarURL %>"/>
+                        </td>
+                        <td><%= user.username %></td>
+                        <td><%= user.presence.status %></td>
+                    </tr>
+                <% } %>
+            <% }) %>
+        </tbody>    
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th><b>Avatar</b></th>
+                <th><b>Username</b></th>
+                <th><b>Status</b></th>
+            </tr>
+        </thead>    
+        <tbody>
+            <% selfos.forEach(selfo => { %>
+                <% user = selfo.user %>
+                <% if(user != undefined) { %>
+                    <tr>
+                        <td>
+                            <img src="<%= user.displayAvatarURL %>"/>
+                        </td>
+                        <td><%= user.username %></td>
+                        <td><%= user.presence.status %></td>
+                    </tr>
+                <% } %>
+            <% }) %>
+        </tbody>    
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th><b>Avatar</b></th>
+                <th><b>Username</b></th>
+                <th><b>Status</b></th>
+            </tr>
+        </thead>    
+        <tbody>
+            <% snipers.forEach(sniper => { %>
+                <% user = sniper.user %>
+                <% if(user != undefined) { %>
+                    <tr>
+                        <td>
+                            <img src="<%= user.displayAvatarURL %>"/>
+                        </td>
+                        <td><%= user.username %></td>
+                        <td><%= user.presence.status %></td>
+                    </tr>
+                <% } %>
+            <% }) %>
+        </tbody>    
+    </table>
+<div>

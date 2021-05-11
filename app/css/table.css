@@ -1,0 +1,49 @@
+.botsTable {
+    text-align: center;
+}
+
+.botsTable table {
+    display: inline-table;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 25px 10px;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 1px 1px 5px #000;
+}
+
+table thead tr {
+    background-color: #b71c1c;
+    color: #fff;
+    font-weight: bold;
+}
+
+table th, table td {
+    padding: 12px 15px;
+}
+
+table th a, table td a {
+    padding: 12px 15px;
+    cursor: pointer;
+}
+
+table th img, table td img {
+    width: 30px;
+    height: auto;
+}
+
+table tbody tr {
+    background-color: #0e0e0e;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #090909;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 1px solid  #b71c1c;;
+}

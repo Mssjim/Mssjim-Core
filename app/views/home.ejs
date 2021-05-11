@@ -1,0 +1,57 @@
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Tempo</b></td>
+            <td><%= ('0' + (minutes-minutes%60)/60).slice(-2) %>:<%= ('0' + minutes%60).slice(-2) %></td>
+            <td><a href="updateTime"><img src="drawable/update.png"></a></td>
+        </tr>
+        <tr>
+            <td><b>Daily</b></td>
+            <td>-<%= ('0' + ((1440-minutes)-(1440-minutes)%60)/60).slice(-2) %>:<%= ('0' + (1440-minutes)%60).slice(-2) %></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Bump</b></td>
+            <td>-<%= ('0' + ((180 - minutes%180)-(180 - minutes%180)%60)/60).slice(-2) %>:<%= ('0' + (180 - minutes%180)%60).slice(-2) %></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th><b>Status</b></th>
+            <th><b>Modulo</b></th>
+            <th><b>Alterar</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <% if(minutes >= 10*60 && minutes < 18*60) { %>
+                <td>
+                    <img src="drawable/enabled.png">
+                </td>
+                <td>Loritta Investimentos</td>
+                <td>-<%= ('0' + ((18*60-minutes)-((18*60-minutes)%60))/60).slice(-2) %>:<%= ('0' + (18*60 - minutes)%60).slice(-2) %></td>
+            <% } else { %>
+                <td>
+                    <img src="drawable/disabled.png">
+                </td>
+                <td>Loritta Investimentos</td>
+                <% if(minutes >= 18*60) { %>
+                    <td>-<%= ('0' + ((34*60-minutes)-((34*60-minutes)%60))/60).slice(-2) %>:<%= ('0' + (34*60 - minutes)%60).slice(-2) %></td>
+                <% } else { %>
+                    <td>-<%= ('0' + ((10*60-minutes)-((10*60-minutes)%60))/60).slice(-2) %>:<%= ('0' + (10*60 - minutes)%60).slice(-2) %></td>
+                <% } %>
+            <% } %>
+        </tr>
+    </tbody>
+</table>

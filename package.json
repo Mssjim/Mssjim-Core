@@ -1,0 +1,27 @@
+{
+  "name": "mssjim-core",
+  "version": "1.0.0",
+  "description": "Mssjim Discord Core",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "author": "Mssjim",
+  "license": "MIT",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "crc": "^3.8.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "request": "^2.88.2",
+    "selfo.js": "^1.0.4",
+    "sileco.db": "^2.2.1",
+    "unirest": "^0.6.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data.json"
+    ]
+  }
+}
