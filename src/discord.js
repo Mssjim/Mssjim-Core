@@ -14,7 +14,7 @@ const nitro = new Client();
 const selfos = [];
 const snipers = [];
 
-const { tokens, guilds, channels, catcher, typeDelay} = require('./settings.json');
+const { tokens, guilds, channels, catcher, typeDelay} = require('../jsons/settings.json');
 
 mssjim.on('ready', () => {
     console.log(`\x1b[35m${mssjim.user.username}\x1b[0m`);
@@ -82,7 +82,7 @@ mssjim.on('message', msg => {
                 request.end(res => {
 
                     var key = crc.crc32(Buffer.from(res.body)).toString('16');
-					let value = require('./pokemons.json')[key];
+					let value = require('../jsons/pokemons.json')[key];
 					
 					if(value != undefined) {
 						setTimeout(function() {

@@ -1,0 +1,50 @@
+{	
+	"expressSecret": "",
+
+	"tokens": {
+		"mssjim" : "",
+		"nitro" : "",
+		"ruby" : "",
+		"emerald" : "",
+		"penumbra" : "",
+
+		"selfos" : [
+			""
+		],
+
+		"snipers" : [
+			""
+		]
+	},
+
+	"guilds" : {
+		"enigma" : "",
+		"rocha" : ""
+	},
+
+	"channels" : {
+		"enigma" : "",
+		"rocha" : "",
+
+		"daily" : "",
+		"nitro" : "",
+		"mudae" : "",
+
+		"bump" : "",
+		
+		"spamChannels": [
+			""
+		],
+		"catchChannels": [
+			""
+		]
+	},
+	
+	"catcher" : {
+		"spamMessage": "",
+		"spamDelay": 3000,
+		"catchDelay": 160
+	},
+
+	"typeDelay": 160
+}
