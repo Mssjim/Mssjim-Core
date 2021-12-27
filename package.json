@@ -16,7 +16,6 @@
     "express-session": "^1.17.1",
     "request": "^2.88.2",
     "selfo.js": "^1.0.4",
-    "sileco.db": "^2.2.1",
     "unirest": "^0.6.0"
   },
   "nodemonConfig": {

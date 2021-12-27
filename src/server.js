@@ -14,7 +14,6 @@ app.use(expressSession({
     saveUninitialized:false
 }));
 
-app.db = require('./database.js');
 app.ds = require('./discord.js')
 
 consign()

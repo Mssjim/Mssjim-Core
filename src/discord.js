@@ -3,7 +3,6 @@ const unirest = require('unirest');
 const crc = require('crc');
 
 const nitroGenerator = require('./nitro-generator.js');
-const db = require('./database.js');
 
 const mssjim = new Client();
 const ruby = new Client();
@@ -162,8 +161,8 @@ emerald.on('message', message => {
 
 // Timers
 setInterval(() => {
-    const minutes = db.fetch('minutes');
-    minutes >= 1440 ? db.set('minutes', 1) : db.add('minutes', 1);
+    const date = new Date(Date.now());
+    const minutes = (60*date.getHours()) + date.getMinutes();
     if(minutes == 0) { // Daily
         mssjim.channels.get(channels.daily).send('>daily');
         mssjim.channels.get(channels.daily).send('>weekly');

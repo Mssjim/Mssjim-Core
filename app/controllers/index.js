@@ -1,8 +1,9 @@
 module.exports.home = function(app, req, res) {
+    const date = new Date(Date.now());
     res.render('index', {
         pagina: 'home',
         session: req.session,
-        minutes: app.db.fetch('minutes')
+        minutes: (60*date.getHours()) + date.getMinutes()
     });
 }
 
@@ -18,7 +19,5 @@ module.exports.bots = function(app, req, res) {
 }
 
 module.exports.updateTime = function(app, req, res) {
-    const date = new Date(Date.now());
-    app.db.set('minutes', (60*date.getHours()) + date.getMinutes())
     res.redirect('/');
 }
