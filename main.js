@@ -1,7 +1,7 @@
 const app = require('./src/server.js');
 const ds = require('./src/discord.js');
 
-var port = (process.argv.slice(2).length < 1) ? 8088 : process.argv.slice(2);
+var port = (process.argv.slice(2).length < 1) ? 5000 : process.argv.slice(2);
 
 function start(port) {
     console.log('O Pai ta Verificando a Porta ' + port);

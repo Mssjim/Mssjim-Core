@@ -18,8 +18,17 @@
             </div>
         </header>
         <ul>
-            <li><a href="/" class="active">Inicio</a></li>
-            <li><a href="/bots">Bots</a></li>
+            <% if(pagina == 'home') { %>
+                <li><a href="/" class="active">Inicio</a></li>
+            <% } else { %>
+                <li><a href="/">Inicio</a></li>
+            <% } %>
+            
+            <% if(pagina == 'bots') { %>
+                <li><a href="/bots" class="active">Bots</a></li>
+            <% } else { %>
+                <li><a href="/bots">Bots</a></li>
+            <% } %>
             <li><a href="/">SLA</a></li>
             <li><a href="/">SLA</a></li>
             <% if(!session.autorizado) { %>

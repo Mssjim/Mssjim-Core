@@ -13,6 +13,10 @@ const nitro = new Client();
 const selfos = [];
 const snipers = [];
 
+let roleta = false;
+
+let rolls = [];
+
 const { tokens, guilds, channels, catcher, typeDelay} = require('./settings.json');
 
 mssjim.on('ready', () => {
@@ -50,6 +54,7 @@ tokens.selfos.forEach(token => {
 tokens.snipers.forEach((token, i) => {
     const sniper = new Client().on('ready', () => {
         console.log(`\x1b[94m${sniper.user.username}\x1b[0m`);
+        return;
 		setInterval(() => {
 			if(i<5) {
 				sniper.channels.get(channels.spamChannels[0]).send(catcher.spamMessage);
@@ -70,8 +75,19 @@ tokens.snipers.forEach((token, i) => {
     snipers.push(sniper);
 });
 
+// Mudae
+mssjim.on('message', msg => {
+    if(msg.author.id != '432610292342587392' || msg.channel.id != '760232504715116545' || !roleta) return;
+    if(msg.embeds?.length > 0) {
+        const embed = msg.embeds[0];
+        const kakera = parseInt(embed.description.substring(embed.description.indexOf('*'), embed.description.lastIndexOf('*')).replace(/[*]/g, ''));
+        rolls.push({msg: msg, kakera: kakera});
+    }
+});
+
 // Pokemon Catcher
 mssjim.on('message', msg => {
+    return;
 	if(msg.author.id != '669228505128501258' || msg.guild == undefined) return;
     if(channels.catchChannels.includes(msg.channel.id)) {
         msg.embeds.forEach(embed => {
@@ -99,6 +115,7 @@ var lastMsgAuthor = "";
 var randomBot = 0;
 
 emerald.on('message', message => {
+    return;
     if(message.channel.id == channels.rocha) {
         if(message.author.bot || message.content == undefined) return;
         if(message.author.id == emerald.user.id || message.content == undefined) return;
@@ -108,8 +125,13 @@ emerald.on('message', message => {
 
         //msg = msg.replace(/<:.+?:\d+>/g, '1kfegsno');
 		
+		var msgImage = "";
+		var msgAuthor = "";
+		
         if(lastMsgAuthor != message.author.id) {
             lastMsgAuthor = message.author.id;
+			msgImage = `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=128`;
+			msgAuthor = `\`${message.author.tag}\`\n`;
 
             if(randomBot < selfos.length - 1) {
                 randomBot++;
@@ -128,19 +150,23 @@ emerald.on('message', message => {
 
         selfos[i].channels.get(channels.enigma).startTyping();
         setTimeout(() => {
-            selfos[i].channels.get(channels.enigma).send(msg);
+            selfos[i].channels.get(channels.enigma).send(msgImage);
+            selfos[i].channels.get(channels.enigma).send(msgAuthor + msg);
             selfos[i].channels.get(channels.enigma).stopTyping();
         }, msg.replace(/<:.+?:\d+>/g, '').length * typeDelay);
     }
     
     if(message.channel.id == channels.enigma) {
         if(message.author.bot || message.content == undefined) return;
-        if(message.author.id == emerald.user.id || message.content == undefined) return;
+        if(message.author.id == emerald.user.id) return;
 
-        var msg;
+        var msg = message.content;
 
-        selfos.forEach(selfo => msg = message.author.id == selfo.user.id ? undefined : message.content);
-
+        selfos.forEach(selfo => {
+			if(message.author.id == selfo.user.id)
+				msg = undefined;
+		});
+		
         if(msg == undefined || msg.length < 1) return;
 
         msg = msg.replace(/<:.+?:\d+>/g, '1kfegsno');
@@ -161,14 +187,21 @@ emerald.on('message', message => {
 
 // Timers
 setInterval(() => {
+    mssjim.channels.get(channels.mudaePoke).send('$p');
     const date = new Date(Date.now());
     const minutes = (60*date.getHours()) + date.getMinutes();
     if(minutes == 0) { // Daily
-        mssjim.channels.get(channels.daily).send('>daily');
-        mssjim.channels.get(channels.daily).send('>weekly');
         mssjim.channels.get(channels.daily).send('^daily');
-        mssjim.channels.get(channels.daily).send('t!daily');
         mssjim.channels.get(channels.daily).send('yuidaily');
+
+        mssjim.channels.get(channels.dailyRocha).send('<weekly');
+        mssjim.channels.get(channels.dailyRocha).send('<daily');
+        mssjim.channels.get(channels.dailyRocha).send('t!daily');
+        mssjim.channels.get(channels.dailyRocha).send('p!daily');
+        mssjim.channels.get(channels.dailyRocha).send('mantaro daily');
+        
+        mssjim.channels.get(channels.mudae).send('$dk');
+        mssjim.channels.get(channels.mudae).send('$daily');
 
         snipers.forEach(sniper => {
             sniper.channels.get(channels.daily).send('>daily');
@@ -187,14 +220,46 @@ setInterval(() => {
         // TODO Payments
     }
 
-    if(minutes % 60 == 0) { // Hourly
-        mssjim.channels.get(channels.mudae).send('$p');
+    if(minutes % 120 == 0) { // 2Hrs
+        mssjim.channels.get(channels.mudaePoke).send('$p');
+    }
+    if(minutes % 180 == 0) { // 3 Horas
+        const rollsCount = 7;
+        roleta = true;
+        setTimeout(() => {
+            roleta = false;
+            rolls = [];
+        }, 30*1000);
+        for(let i=0; i<rollsCount; i++) {
+            setTimeout(() => {
+                mssjim.channels.get(channels.mudae).send('$wa');
+            }, i*1000);
+        }
+        setTimeout(() => {
+            rolls = rolls.sort((a,b) => b.kakera - a.kakera);
+            rolls[0].msg.react(Array.from(rolls[0].msg.reactions.keys())[0]);
+        }, 12000);
+
+        setTimeout(() => {
+            roleta = true;
+            setTimeout(() => {
+                roleta = false;
+                rolls = [];
+            }, 30*1000);
+            for(let i=0; i<rollsCount; i++) {
+                setTimeout(() => {
+                    ruby.channels.get(channels.mudae).send('$wa');
+                }, i*1000);
+            }
+            setTimeout(() => {
+                rolls = rolls.sort((a,b) => b.kakera - a.kakera);
+                rolls[0].msg.react(Array.from(rolls[0].msg.reactions.keys())[0]);
+            }, 12000);
+        }, 120*1000);
     }
 
-    if(minutes % 180 == 0) { // 3 Horas
-        setTimeout(() => {
-            ruby.channels.get(channels.bump).send('!d bump');
-        }, Math.floor(Math.random() * (1000*60*30)));
+    if(minutes % 121 == 0) { // 2 Horas
+        mssjim.channels.get(channels.bump).send('!d bump');
     }
 }, 1000*60);
 
