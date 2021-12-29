@@ -9,7 +9,7 @@ app.set('views', './app/views');
   
 app.use(express.static('./app'));
 app.use(expressSession({
-    secret: require('./settings.json').expressSecret,
+    secret: require('../jsons/settings.json').expressSecret,
     resave: false,
     saveUninitialized:false
 }));

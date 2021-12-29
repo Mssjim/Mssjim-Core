@@ -1,4 +1,7 @@
 /node_modules
 /.vscode
 /package-lock.json
-/src/settings.json
+
+# Settings File
+/jsons/data.json
+/jsons/settings.json
