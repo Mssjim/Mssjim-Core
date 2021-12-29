@@ -13,10 +13,6 @@ const nitro = new Client();
 const selfos = [];
 const snipers = [];
 
-let roleta = false;
-
-let rolls = [];
-
 const { tokens, guilds, channels, catcher, typeDelay} = require('./settings.json');
 
 mssjim.on('ready', () => {
@@ -73,16 +69,6 @@ tokens.snipers.forEach((token, i) => {
     sniper.login(token);
 
     snipers.push(sniper);
-});
-
-// Mudae
-mssjim.on('message', msg => {
-    if(msg.author.id != '432610292342587392' || msg.channel.id != '760232504715116545' || !roleta) return;
-    if(msg.embeds?.length > 0) {
-        const embed = msg.embeds[0];
-        const kakera = parseInt(embed.description.substring(embed.description.indexOf('*'), embed.description.lastIndexOf('*')).replace(/[*]/g, ''));
-        rolls.push({msg: msg, kakera: kakera});
-    }
 });
 
 // Pokemon Catcher
@@ -187,7 +173,6 @@ emerald.on('message', message => {
 
 // Timers
 setInterval(() => {
-    mssjim.channels.get(channels.mudaePoke).send('$p');
     const date = new Date(Date.now());
     const minutes = (60*date.getHours()) + date.getMinutes();
     if(minutes == 0) { // Daily
@@ -222,40 +207,6 @@ setInterval(() => {
 
     if(minutes % 120 == 0) { // 2Hrs
         mssjim.channels.get(channels.mudaePoke).send('$p');
-    }
-    if(minutes % 180 == 0) { // 3 Horas
-        const rollsCount = 7;
-        roleta = true;
-        setTimeout(() => {
-            roleta = false;
-            rolls = [];
-        }, 30*1000);
-        for(let i=0; i<rollsCount; i++) {
-            setTimeout(() => {
-                mssjim.channels.get(channels.mudae).send('$wa');
-            }, i*1000);
-        }
-        setTimeout(() => {
-            rolls = rolls.sort((a,b) => b.kakera - a.kakera);
-            rolls[0].msg.react(Array.from(rolls[0].msg.reactions.keys())[0]);
-        }, 12000);
-
-        setTimeout(() => {
-            roleta = true;
-            setTimeout(() => {
-                roleta = false;
-                rolls = [];
-            }, 30*1000);
-            for(let i=0; i<rollsCount; i++) {
-                setTimeout(() => {
-                    ruby.channels.get(channels.mudae).send('$wa');
-                }, i*1000);
-            }
-            setTimeout(() => {
-                rolls = rolls.sort((a,b) => b.kakera - a.kakera);
-                rolls[0].msg.react(Array.from(rolls[0].msg.reactions.keys())[0]);
-            }, 12000);
-        }, 120*1000);
     }
 
     if(minutes % 121 == 0) { // 2 Horas
